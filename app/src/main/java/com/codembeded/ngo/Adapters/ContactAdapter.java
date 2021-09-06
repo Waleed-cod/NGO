@@ -20,17 +20,8 @@ import android.widget.Toast;
 import com.codembeded.ngo.R;
 import com.codembeded.ngo.models.CollectPhoneNumbers;
 import com.codembeded.ngo.models.ContactModel;
-import com.codembeded.ngo.models.MainViewModel;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
