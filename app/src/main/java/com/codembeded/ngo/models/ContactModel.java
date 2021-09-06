@@ -3,6 +3,8 @@ package com.codembeded.ngo.models;
 public class ContactModel {
     String contact_img,contact_name,contact_phone;
 
+    public ContactModel() {
+    }
 
     public ContactModel(String char_text_box, String contact_name, String contact_phone) {
         this.contact_img = char_text_box;
