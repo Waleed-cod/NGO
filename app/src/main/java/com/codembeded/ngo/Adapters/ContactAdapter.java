@@ -32,6 +32,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     ArrayList<ContactModel> selectedItems = new ArrayList<>();
     ArrayList<String> data = new ArrayList<>();
     CollectPhoneNumbers listener;
+    int selected_position = 0;
 
 
     public ContactAdapter(Context mContext, ArrayList<ContactModel> list, CollectPhoneNumbers listener) {
@@ -61,7 +62,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         holder.contact_name.setText(list.get(position).getContact_name());
         holder.contact_phone_number.setText(list.get(position).getContact_phone());
-//        if (holder.itemView.isSelected() == selectedItems.contains(list.get(position))){
+
+//        holder.itemView.setBackgroundColor(selected_position == position ? Color.GREEN : Color.TRANSPARENT);
+        if (!selectedItems.contains(position)){
+            // view not selected
+            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+        }
+        else{
+            // view is selected
+            holder.itemView.setBackgroundColor(R.color.blue_grey_600);
+    }
+
+//        if (!holder.itemView.isSelected() == selectedItems.contains(list.get(position))){
 //            holder.itemView.setBackgroundColor(R.color.blue_grey_600);
 //
 //        }
@@ -120,7 +132,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                             data.remove(list.get(getAdapterPosition()).getContact_phone());
 
                         } else {
-                            itemView.setBackgroundColor(R.color.colorAccent);
+                            itemView.setBackgroundColor(R.color.blue_grey_600);
                             selectedItems.add(list.get(getAdapterPosition()));
                             data.add(list.get(getAdapterPosition()).getContact_phone());
                             listener.phoneNumbers(getAdapterPosition(),data);

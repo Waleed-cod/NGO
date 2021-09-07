@@ -40,20 +40,34 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         sendBtn = findViewById(R.id.sendBtn);
         msgEt = findViewById(R.id.msgEt);
         checkPermission();
+        //check conditions
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.SEND_SMS
+        ) == PackageManager.PERMISSION_GRANTED) {
+            //when permission is granted
+
+        } else {
+            //when permission denied
+            //Request permission
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.SEND_SMS}, 100);
+        }
 
     }
 
     private void checkPermission() {
-        if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS)
-        != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.READ_CONTACTS},100);
-        }else {
+                    new String[]{Manifest.permission.READ_CONTACTS}, 100);
+        } else {
             getContactList();
         }
+
+
     }
 
-    void getContactList(){
+    void getContactList() {
         Uri uri = ContactsContract.Contacts.CONTENT_URI;
 
         String sort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
@@ -103,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
             cursor.close();
         }
         //set Layout
-        adapter = new ContactAdapter(this,data,this);
-        contact_rv.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
+        adapter = new ContactAdapter(this, data, this);
+        contact_rv.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
         contact_rv.setAdapter(adapter);
     }
 
@@ -112,9 +126,9 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode==100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                getContactList();
-        }else {
+        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getContactList();
+        } else {
 
             Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
             checkPermission();
@@ -127,46 +141,28 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //check conditions
-                if(ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.SEND_SMS
-                )== PackageManager.PERMISSION_GRANTED){
-                    //when permission is granted
-                    sendMessage(collectedNumbers);
-
-
-                }else{
-                    //when permission denied
-                    //Request permission
-                    ActivityCompat.requestPermissions(MainActivity.this,
-                            new String[]{Manifest.permission.SEND_SMS},100);
-                }
-
+                sendMessage(collectedNumbers);
             }
         });
     }
 
-    private void sendMessage(ArrayList<String> collectedNumbers)
-    {
+    private void sendMessage(ArrayList<String> collectedNumbers) {
         //get values from fields
-        //  String phoneNumber = et_phone.getText().toString().trim();
-//        String number[] = {"03248780332","03016300419"};
 
-        Toast.makeText(getApplicationContext(), "getpghonre numner: "+ collectedNumbers, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Phone Numbers: " + collectedNumbers, Toast.LENGTH_SHORT).show();
 
         // String numbers[] = phoneNumber.split(", *");
         String msg = msgEt.getText().toString();
         //checking conditions
-        if(!collectedNumbers.equals("")&&!msg.equals("")){
+        if (!collectedNumbers.equals("") && !msg.equals("")) {
             // when values are not empty
             //initialize the sms manager
             SmsManager smsManager = SmsManager.getDefault();
 
             //send msg
-            for(String num:collectedNumbers){
-                smsManager.sendTextMessage((num),null,msg,
-                        null,null);
+            for (String num : collectedNumbers) {
+                smsManager.sendTextMessage((num), null, msg,
+                        null, null);
 
             }
 
@@ -175,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
                     Toast.LENGTH_SHORT).show();
             msgEt.setText("");
 
-        }else {
+        } else {
             //when fields are blank
             Toast.makeText(getApplicationContext(), "Fill the Fields",
                     Toast.LENGTH_SHORT).show();
