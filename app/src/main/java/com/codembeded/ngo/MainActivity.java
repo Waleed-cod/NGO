@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
                 final String[] permissions = new String[]{Manifest.permission.READ_CONTACTS,Manifest.permission.SEND_SMS
         };
         ActivityCompat.requestPermissions(this, permissions, 100);
+
+
         getContactList();
 
 

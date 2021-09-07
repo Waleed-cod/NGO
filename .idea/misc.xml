@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/FlutterProjects/NGO/app/src/main/res/drawable/checkbox.xml" value="0.22447916666666667" />
+        <entry key="..\:/FlutterProjects/NGO/app/src/main/res/drawable/custom_checkbox.xml" value="0.22447916666666667" />
+        <entry key="..\:/FlutterProjects/NGO/app/src/main/res/drawable/et_bg.xml" value="0.22447916666666667" />
+        <entry key="..\:/FlutterProjects/NGO/app/src/main/res/drawable/unchecked.xml" value="0.22447916666666667" />
+        <entry key="..\:/FlutterProjects/NGO/app/src/main/res/layout/activity_main.xml" value="0.2037037037037037" />
         <entry key="..\:/FlutterProjects/NGO/app/src/main/res/layout/contact_box.xml" value="0.2037037037037037" />
         <entry key="..\:/NGO/app/src/main/res/drawable/contact_img_shape.xml" value="0.2203125" />
         <entry key="..\:/NGO/app/src/main/res/drawable/ic_round_send_24.xml" value="0.2203125" />
