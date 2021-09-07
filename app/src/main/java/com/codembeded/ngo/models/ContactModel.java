@@ -2,8 +2,23 @@ package com.codembeded.ngo.models;
 
 public class ContactModel {
     String contact_img,contact_name,contact_phone;
+    boolean check;
 
     public ContactModel() {
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public ContactModel(String contact_name, String contact_phone, boolean is_check) {
+        this.contact_name = contact_name;
+        this.contact_phone = contact_phone;
+        this.check = is_check;
     }
 
     public ContactModel(String char_text_box, String contact_name, String contact_phone) {

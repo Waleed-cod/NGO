@@ -39,30 +39,40 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         contact_rv = findViewById(R.id.contact_rv);
         sendBtn = findViewById(R.id.sendBtn);
         msgEt = findViewById(R.id.msgEt);
+
+
+
         checkPermission();
         //check conditions
-        if (ContextCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.SEND_SMS
-        ) == PackageManager.PERMISSION_GRANTED) {
-            //when permission is granted
-
-        } else {
-            //when permission denied
-            //Request permission
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.SEND_SMS}, 100);
-        }
+//        if (ContextCompat.checkSelfPermission(MainActivity.this,
+//                Manifest.permission.SEND_SMS
+//        ) == PackageManager.PERMISSION_GRANTED) {
+//            //when permission is granted
+//
+//        } else {
+//            //when permission denied
+//            //Request permission
+//            ActivityCompat.requestPermissions(MainActivity.this,
+//                    new String[]{Manifest.permission.SEND_SMS}, 100);
+//        }
 
     }
 
     private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.READ_CONTACTS}, 100);
-        } else {
-            getContactList();
-        }
+
+                final String[] permissions = new String[]{Manifest.permission.READ_CONTACTS,Manifest.permission.SEND_SMS
+        };
+        ActivityCompat.requestPermissions(this, permissions, 100);
+        getContactList();
+
+
+//        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            ActivityCompat.requestPermissions(MainActivity.this,
+//                    new String[]{Manifest.permission.READ_CONTACTS}, 100);
+//        } else {
+//            getContactList();
+//        }
 
 
     }
@@ -103,13 +113,8 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
                             ContactsContract.CommonDataKinds.Phone.NUMBER
                     ));
                     //Initialize contact model
-                    ContactModel model = new ContactModel();
-                    //setName
-                    model.setContact_name(name);
+                    data.add(new ContactModel(name, number, false));
 
-                    model.setContact_phone(number);
-
-                    data.add(model);
 
                     phoneCursor.close();
                 }

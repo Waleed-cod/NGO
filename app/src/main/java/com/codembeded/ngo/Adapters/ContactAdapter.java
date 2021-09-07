@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,11 +21,13 @@ import android.widget.Toast;
 import com.codembeded.ngo.R;
 import com.codembeded.ngo.models.CollectPhoneNumbers;
 import com.codembeded.ngo.models.ContactModel;
+
 import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder>{
 
     Context mContext;
     ArrayList<ContactModel> list;
@@ -54,7 +57,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     @SuppressLint("ResourceAsColor")
     @Override
-    public void onBindViewHolder(@NonNull ContactAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         String c = list.get(position).getContact_name();
         String character = String.valueOf(c.charAt(0));
@@ -62,31 +65,31 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         holder.contact_name.setText(list.get(position).getContact_name());
         holder.contact_phone_number.setText(list.get(position).getContact_phone());
-
-//        holder.itemView.setBackgroundColor(selected_position == position ? Color.GREEN : Color.TRANSPARENT);
-        if (!selectedItems.contains(position)){
-            // view not selected
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-        }
-        else{
-            // view is selected
-            holder.itemView.setBackgroundColor(R.color.blue_grey_600);
-    }
-
-//        if (!holder.itemView.isSelected() == selectedItems.contains(list.get(position))){
-//            holder.itemView.setBackgroundColor(R.color.blue_grey_600);
-//
-//        }
+        holder.checkbox_iv.setChecked(list.get(position).isCheck());
+//        holder.checkbox_iv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (holder.checkbox_iv.isChecked()) {
+//                    data.add(list.get(position).getContact_phone());
+//                    Toast.makeText(mContext, list.get(position).getContact_phone() + "/" + list.get(position).getContact_name() +"/"+ String.valueOf(list.get(position)), Toast.LENGTH_SHORT).show();
+//                } else {
+//                    data.remove(list.get(position).getContact_phone());
+//                }
+////                listener.phoneNumbers(position, data);
+//            }
+//        });
 
     }
+
 
     @Override
     public int getItemCount() {
         return list.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView checkbox_iv;
+        CheckBox checkbox_iv;
         TextView char_text_box, contact_name, contact_phone_number;
 
         public ViewHolder(@NonNull View itemView) {
@@ -97,55 +100,72 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             contact_name = itemView.findViewById(R.id.contact_name_tv);
             contact_phone_number = itemView.findViewById(R.id.contact_phone_number);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @SuppressLint("ResourceAsColor")
-                @Override
-                public boolean onLongClick(View v) {
-                    isSelectedMode = true;
-                    if (selectedItems.contains(list.get(getAdapterPosition()))) {
-                        itemView.setBackgroundColor(Color.TRANSPARENT);
-                        selectedItems.remove(list.get(getAdapterPosition()));
-                        data.remove(list.get(getAdapterPosition()).getContact_phone());
-                        listener.phoneNumbers(getAdapterPosition(),data);
-
-
-                    } else {
-                        itemView.setBackgroundColor(R.color.blue_grey_600);
-                        selectedItems.add(list.get(getAdapterPosition()));
-                        data.add(list.get(getAdapterPosition()).getContact_phone());
-                        Toast.makeText(mContext, "nuMBRs: " + data, Toast.LENGTH_SHORT).show();
-                    }
-
-                    if (selectedItems.size() == 0)
-                        isSelectedMode = false;
-                    return true;
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @SuppressLint("ResourceAsColor")
+            checkbox_iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isSelectedMode) {
-                        if (selectedItems.contains(list.get(getAdapterPosition()))) {
-                            itemView.setBackgroundColor(Color.TRANSPARENT);
-                            selectedItems.remove(list.get(getAdapterPosition()));
-                            data.remove(list.get(getAdapterPosition()).getContact_phone());
-
-                        } else {
-                            itemView.setBackgroundColor(R.color.blue_grey_600);
-                            selectedItems.add(list.get(getAdapterPosition()));
-                            data.add(list.get(getAdapterPosition()).getContact_phone());
-                            listener.phoneNumbers(getAdapterPosition(),data);
-
-                            Toast.makeText(mContext, "nuMBRs: " + data, Toast.LENGTH_SHORT).show();
-                        }
-                        if (selectedItems.size() == 0)
-                            isSelectedMode = false;
+                    if (checkbox_iv.isChecked()) {
+                        list.get(getAdapterPosition()).setCheck(true);
+                        data.add(list.get(getAdapterPosition()).getContact_phone());
+//                        Toast.makeText(mContext, String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
                     } else {
-
+                        list.get(getAdapterPosition()).setCheck(false);
+                        data.remove(list.get(getAdapterPosition()).getContact_phone());
                     }
+                    listener.phoneNumbers(getAdapterPosition(),data);
+
                 }
             });
+//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+//                @SuppressLint("ResourceAsColor")
+//                @Override
+//                public boolean onLongClick(View v) {
+//                    isSelectedMode = true;
+//                    if (selectedItems.contains(list.get(getAdapterPosition()))) {
+//                        itemView.setBackgroundColor(Color.TRANSPARENT);
+//                        selectedItems.remove(list.get(getAdapterPosition()));
+//                        data.remove(list.get(getAdapterPosition()).getContact_phone());
+//                        listener.phoneNumbers(getAdapterPosition(),data);
+//
+//
+//                    } else {
+//                        itemView.setBackgroundColor(R.color.blue_grey_600);
+//                        selectedItems.add(list.get(getAdapterPosition()));
+//                        data.add(list.get(getAdapterPosition()).getContact_phone());
+//                        Toast.makeText(mContext, "nuMBRs: " + data, Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    if (selectedItems.size() == 0)
+//                        isSelectedMode = false;
+//                    return true;
+//                }
+//            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @SuppressLint("ResourceAsColor")
+//                @Override
+//                public void onClick(View v) {
+//                    if (isSelectedMode) {
+//                        if (selectedItems.contains(list.get(getAdapterPosition()))) {
+//                            itemView.setBackgroundColor(Color.TRANSPARENT);
+//                            selectedItems.remove(list.get(getAdapterPosition()));
+//                            data.remove(list.get(getAdapterPosition()).getContact_phone());
+//
+//                        } else {
+//                            itemView.setBackgroundColor(R.color.blue_grey_600);
+//                            selectedItems.add(list.get(getAdapterPosition()));
+//                            data.add(list.get(getAdapterPosition()).getContact_phone());
+//                            listener.phoneNumbers(getAdapterPosition(),data);
+//
+//                            Toast.makeText(mContext, "nuMBRs: " + data, Toast.LENGTH_SHORT).show();
+//                        }
+//                        if (selectedItems.size() == 0)
+//                            isSelectedMode = false;
+//                    } else {
+//
+//                    }
+//                }
+//            });
+
+
         }
     }
 
