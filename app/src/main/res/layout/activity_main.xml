@@ -30,7 +30,7 @@
         android:background="@drawable/et_bg"
         android:hint="Enter Message...."
         android:maxHeight="300dp"
-        android:padding="7.5dp" />
+        android:padding="8dp" />
 
     <ImageButton
         android:id="@+id/sendBtn"
