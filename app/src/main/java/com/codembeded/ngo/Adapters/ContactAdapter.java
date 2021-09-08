@@ -65,7 +65,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
         holder.contact_name.setText(list.get(position).getContact_name());
         holder.contact_phone_number.setText(list.get(position).getContact_phone());
-        holder.checkbox_iv.setChecked(list.get(position).isCheck());
+        holder.checkbox.setChecked(list.get(position).isCheck());
 //        holder.checkbox_iv.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -89,21 +89,21 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        CheckBox checkbox_iv;
+        CheckBox checkbox;
         TextView char_text_box, contact_name, contact_phone_number;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            checkbox_iv = itemView.findViewById(R.id.checkbox_iv);
+            checkbox = itemView.findViewById(R.id.checkbox_iv);
             char_text_box = itemView.findViewById(R.id.char_text_box);
             contact_name = itemView.findViewById(R.id.contact_name_tv);
             contact_phone_number = itemView.findViewById(R.id.contact_phone_number);
 
-            checkbox_iv.setOnClickListener(new View.OnClickListener() {
+            checkbox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (checkbox_iv.isChecked()) {
+                    if (checkbox.isChecked()) {
                         list.get(getAdapterPosition()).setCheck(true);
                         data.add(list.get(getAdapterPosition()).getContact_phone());
 //                        Toast.makeText(mContext, String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
