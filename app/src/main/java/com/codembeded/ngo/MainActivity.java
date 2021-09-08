@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         contact_rv = findViewById(R.id.contact_rv);
         sendBtn = findViewById(R.id.sendBtn);
         msgEt = findViewById(R.id.msgEt);
+        getSupportActionBar().setTitle("AL-HUDA SARFRAZ COLONY");
 
 
 
@@ -63,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
                 final String[] permissions = new String[]{Manifest.permission.READ_CONTACTS,Manifest.permission.SEND_SMS
         };
         ActivityCompat.requestPermissions(this, permissions, 100);
-
-
         getContactList();
 
 
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
     private void sendMessage(ArrayList<String> collectedNumbers) {
         //get values from fields
 
-        Toast.makeText(getApplicationContext(), "Phone Numbers: " + collectedNumbers, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(getApplicationContext(), "Phone Numbers: " + collectedNumbers, Toast.LENGTH_SHORT).show();
 
         // String numbers[] = phoneNumber.split(", *");
         String msg = msgEt.getText().toString();
