@@ -100,7 +100,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             contact_name = itemView.findViewById(R.id.contact_name_tv);
             contact_phone_number = itemView.findViewById(R.id.contact_phone_number);
 
-            checkbox.setOnClickListener(new View.OnClickListener() {
+//            checkbox.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//
+//                }
+//            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (checkbox.isChecked()) {
