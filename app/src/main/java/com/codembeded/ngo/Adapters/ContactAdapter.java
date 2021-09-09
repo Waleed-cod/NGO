@@ -112,6 +112,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     checkbox.setChecked(!checkbox.isChecked());
+
                     if (checkbox.isChecked()) {
                         list.get(getAdapterPosition()).setCheck(true);
                         data.add(list.get(getAdapterPosition()).getContact_phone());
