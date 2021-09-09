@@ -7,9 +7,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_logo_confirm"
+        android:icon="@mipmap/ic_al_huda_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_logo_confirm_round"
+        android:roundIcon="@mipmap/ic_al_huda_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NGO">
         <activity
