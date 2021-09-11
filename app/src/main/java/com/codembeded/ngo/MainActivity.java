@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         sendBtn = findViewById(R.id.sendBtn);
         msgEt = findViewById(R.id.msgEt);
         getSupportActionBar().setTitle("AL-HUDA SARFRAZ COLONY");
+        getContactList();
 
 
 
-        checkPermission();
+
         //check conditions
 //        if (ContextCompat.checkSelfPermission(MainActivity.this,
 //                Manifest.permission.SEND_SMS
@@ -59,24 +60,7 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
 
     }
 
-    private void checkPermission() {
 
-                final String[] permissions = new String[]{Manifest.permission.READ_CONTACTS,Manifest.permission.SEND_SMS
-        };
-        ActivityCompat.requestPermissions(this, permissions, 100);
-        getContactList();
-
-
-//        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CONTACTS)
-//                != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(MainActivity.this,
-//                    new String[]{Manifest.permission.READ_CONTACTS}, 100);
-//        } else {
-//            getContactList();
-//        }
-
-
-    }
 
     void getContactList() {
         Uri uri = ContactsContract.Contacts.CONTENT_URI;
@@ -128,18 +112,7 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         contact_rv.setAdapter(adapter);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            getContactList();
-        } else {
-
-            Toast.makeText(MainActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
-            checkPermission();
-        }
-    }
 
     @Override
     public void phoneNumbers(int pos, ArrayList<String> collectedNumbers) {
