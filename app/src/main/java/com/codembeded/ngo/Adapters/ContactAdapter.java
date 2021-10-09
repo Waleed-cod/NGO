@@ -31,11 +31,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     Context mContext;
     ArrayList<ContactModel> list;
-    boolean isSelectedMode = false;
-    ArrayList<ContactModel> selectedItems = new ArrayList<>();
+  //  boolean isSelectedMode = false;
+   // ArrayList<ContactModel> selectedItems = new ArrayList<>();
     ArrayList<String> data = new ArrayList<>();
     CollectPhoneNumbers listener;
-    int selected_position = 0;
+ //   int selected_position = 0;
 
 
     public ContactAdapter(Context mContext, ArrayList<ContactModel> list, CollectPhoneNumbers listener) {
@@ -66,19 +66,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
         holder.contact_name.setText(list.get(position).getContact_name());
         holder.contact_phone_number.setText(list.get(position).getContact_phone());
         holder.checkbox.setChecked(list.get(position).isCheck());
-//        holder.checkbox_iv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (holder.checkbox_iv.isChecked()) {
-//                    data.add(list.get(position).getContact_phone());
-//                    Toast.makeText(mContext, list.get(position).getContact_phone() + "/" + list.get(position).getContact_name() +"/"+ String.valueOf(list.get(position)), Toast.LENGTH_SHORT).show();
-//                } else {
-//                    data.remove(list.get(position).getContact_phone());
-//                }
-////                listener.phoneNumbers(position, data);
-//            }
-//        });
-
     }
 
 
@@ -100,13 +87,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             contact_name = itemView.findViewById(R.id.contact_name_tv);
             contact_phone_number = itemView.findViewById(R.id.contact_phone_number);
 
-//            checkbox.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//
-//                }
-//            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,67 +94,20 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
                     checkbox.setChecked(!checkbox.isChecked());
 
                     if (checkbox.isChecked()) {
+
                         list.get(getAdapterPosition()).setCheck(true);
                         data.add(list.get(getAdapterPosition()).getContact_phone());
-//                        Toast.makeText(mContext, String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+
+
                     } else {
                         list.get(getAdapterPosition()).setCheck(false);
                         data.remove(list.get(getAdapterPosition()).getContact_phone());
+
                     }
                     listener.phoneNumbers(getAdapterPosition(),data);
 
                 }
             });
-//            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-//                @SuppressLint("ResourceAsColor")
-//                @Override
-//                public boolean onLongClick(View v) {
-//                    isSelectedMode = true;
-//                    if (selectedItems.contains(list.get(getAdapterPosition()))) {
-//                        itemView.setBackgroundColor(Color.TRANSPARENT);
-//                        selectedItems.remove(list.get(getAdapterPosition()));
-//                        data.remove(list.get(getAdapterPosition()).getContact_phone());
-//                        listener.phoneNumbers(getAdapterPosition(),data);
-//
-//
-//                    } else {
-//                        itemView.setBackgroundColor(R.color.blue_grey_600);
-//                        selectedItems.add(list.get(getAdapterPosition()));
-//                        data.add(list.get(getAdapterPosition()).getContact_phone());
-//                        Toast.makeText(mContext, "nuMBRs: " + data, Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    if (selectedItems.size() == 0)
-//                        isSelectedMode = false;
-//                    return true;
-//                }
-//            });
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @SuppressLint("ResourceAsColor")
-//                @Override
-//                public void onClick(View v) {
-//                    if (isSelectedMode) {
-//                        if (selectedItems.contains(list.get(getAdapterPosition()))) {
-//                            itemView.setBackgroundColor(Color.TRANSPARENT);
-//                            selectedItems.remove(list.get(getAdapterPosition()));
-//                            data.remove(list.get(getAdapterPosition()).getContact_phone());
-//
-//                        } else {
-//                            itemView.setBackgroundColor(R.color.blue_grey_600);
-//                            selectedItems.add(list.get(getAdapterPosition()));
-//                            data.add(list.get(getAdapterPosition()).getContact_phone());
-//                            listener.phoneNumbers(getAdapterPosition(),data);
-//
-//                            Toast.makeText(mContext, "nuMBRs: " + data, Toast.LENGTH_SHORT).show();
-//                        }
-//                        if (selectedItems.size() == 0)
-//                            isSelectedMode = false;
-//                    } else {
-//
-//                    }
-//                }
-//            });
-
 
         }
     }
