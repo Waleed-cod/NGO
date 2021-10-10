@@ -15,6 +15,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.SmsManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
     ArrayList<ContactModel> data = new ArrayList<>();
     ImageButton sendBtn;
     EditText msgEt;
-    Button btn_next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +44,6 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         contact_rv = findViewById(R.id.contact_rv);
         sendBtn = findViewById(R.id.sendBtn);
         msgEt = findViewById(R.id.msgEt);
-        btn_next = findViewById(R.id.btn_next);
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ReadContact.class);
-                startActivity(intent);
-                finish();
-
-            }
-        });
         getSupportActionBar().setTitle("AL-HUDA SARFRAZ COLONY");
         getContactList();
 
@@ -109,7 +102,28 @@ public class MainActivity extends AppCompatActivity implements CollectPhoneNumbe
         contact_rv.setAdapter(adapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menunext,menu);
 
+
+         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+          case R.id.next_item:
+            Intent intent = new Intent(getApplicationContext(),ReadContact.class);
+            startActivity(intent);
+            finish();
+            break;
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void phoneNumbers(int pos, ArrayList<String> collectedNumbers) {
